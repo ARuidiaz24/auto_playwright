@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import sync_playwright, expect  
+from playwright.sync_api import sync_playwright, expect   # type: ignore
 from utils.login_helper import login
 
 @pytest.fixture(scope="function")
@@ -18,4 +18,10 @@ def test_login_Correct(config_browser):
     url_actual = page.url
     url_esperada = 'https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index'
     assert url_actual == url_esperada, f"Se esperaba {url_esperada}, pero se obtuvo {url_actual}"
-    page.wait_for_timeout(10000)
+
+def test_login_password(config_browser):
+    page = config_browser
+    page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    login(page, "Admin", "admin12")
+    alert = page.locator("div[role='alert']")
+    expect(alert).to_be_visible()

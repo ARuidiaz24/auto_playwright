@@ -1,6 +1,6 @@
 import asyncio
 from logging import handlers
-from playwright.async_api import async_playwright, expect
+from playwright.async_api import async_playwright, expect # type: ignore
 
 async def main():
     async with async_playwright() as p:
