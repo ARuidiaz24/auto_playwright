@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright, expect   # type: ignore
-from utils.login_helper import login
+from test_login.utils.login_helper import login
 
 @pytest.fixture(scope="function")
 def config_browser():
